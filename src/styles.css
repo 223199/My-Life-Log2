@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg:#faf7f2;
+  --surface:#fffaf3;
+  --text:#2b2b2b;
+  --primary:#4b342a;
+  --border:#e5dfd6;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Noto Sans JP", system-ui, -apple-system, sans-serif;
+}
