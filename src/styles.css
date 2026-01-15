@@ -1,166 +1,213 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ===============================
+   基本リセット・土台
+   =============================== */
 
-:root{
-  --bg:#faf7f2;
-  --surface:#fffaf3;
-  --text:#2b2b2b;
-  --primary:#4b342a;
-  --border:#e5dfd6;
-}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:"Noto Sans JP", system-ui, -apple-system, sans-serif;
-}
-
-/* ===== App Shell（スマホ縦長固定） ===== */
-body {
-  margin: 0;
-  background: radial-gradient(1200px 600px at 20% 10%, rgba(214,180,140,.25), transparent 60%),
-              radial-gradient(900px 500px at 80% 0%, rgba(244,238,230,.18), transparent 55%),
-              #1f1711;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-}
-
-/* PCの中央にスマホ画面（アプリ本体） */
-.phoneFrame {
-  width: min(420px, 94vw);
-  height: min(860px, 94vh);
-  border-radius: 28px;
-  padding: 14px;
-  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.45),
-    inset 0 0 0 1px rgba(255,255,255,.12);
-}
-
-.phoneScreen {
-  height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #2b211a; /* アプリの背景 */
-  color: #f4eee6;       /* 文字 */
-  box-shadow: inset 0 0 0 1px rgba(244,238,230,.10);
-}
-
-/* 画面上部の“ステータスバー風” */
-.statusBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 14px;
-  font-size: 12px;
-  color: rgba(244,238,230,.80);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), transparent);
-  border-bottom: 1px solid rgba(244,238,230,.10);
-}
-
-/* PC画面全体 */
-body, html, #root {
-  margin: 0;
-  height: 100%;
-}
-
-/* スマホ枠の外側 */
-.phoneFrame {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* ← これが超重要 */
-  background: #f5f1ea; /* ほんのり背景（好みでOK） */
-}
-
-/* スマホ本体 */
-.phoneScreen {
-  width: 390px;           /* iPhoneっぽい幅 */
-  height: 844px;          /* iPhoneっぽい高さ */
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* 擬似ステータスバー */
-.statusBar {
-  height: 48px;
-  background: #f9f7f3;
-  border-bottom: 1px solid #ddd;
-  padding: 0 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-}
-
-/* ページ本体 */
-.page {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-}
-
-/* ===== Full viewport centering ===== */
 html, body {
   height: 100%;
   margin: 0;
-}
-#root {
-  min-height: 100vh;
+  padding: 0;
+  background: #1f1711; /* PC背景 */
+  font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* PC画面全体の中央に“スマホ”を置く */
+#root {
+  height: 100%;
+}
+
+/* ===============================
+   PC上の配置（中央寄せ）
+   =============================== */
+
 .phoneFrame {
-  min-height: 100vh;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: grid;
   place-items: center;
   padding: 16px;
-  background: #1f1711; /* PC背景（好みで） */
+  box-sizing: border-box;
 }
 
-/* “スマホ本体”は高さも幅も最大限使う（ただし大きすぎないよう制限） */
+/* ===============================
+   スマホ画面本体
+   =============================== */
+
 .phoneScreen {
-  width: min(430px, 100%);
-  height: min(900px, 100vh - 32px);
+  width: min(420px, 100%);
+  height: 100%;
+  max-height: 900px;
+
   display: flex;
   flex-direction: column;
   overflow: hidden;
 
-  border-radius: 28px;
   background: #2b211a;
   color: #f4eee6;
 
+  border-radius: 28px;
   box-shadow:
     0 30px 90px rgba(0,0,0,.55),
     inset 0 0 0 1px rgba(244,238,230,.10);
 }
 
-/* 上のバー */
+/* ===============================
+   ステータスバー（上部固定）
+   =============================== */
+
 .statusBar {
   flex: 0 0 auto;
   height: 52px;
   padding: 0 14px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  background: linear-gradient(180deg, rgba(255,255,255,.08), transparent);
-  border-bottom: 1px solid rgba(244,238,230,.10);
-  color: rgba(244,238,230,.85);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,0)
+  );
+
+  border-bottom: 1px solid rgba(244,238,230,.12);
   font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(244,238,230,.85);
 }
 
-/* ルーティングで切り替わる中身は、残り全部を占めてスクロール */
+/* ===============================
+   ページ領域（ここが重要）
+   =============================== */
+
 .page {
-  flex: 1 1 auto;
-  min-height: 0;      /* ←これがないと“広がらない/スクロールが変”になりがち */
+  flex: 1 1 auto;     /* ← 残り全部を使う */
+  min-height: 0;      /* ← これが無いと縦が壊れる */
   overflow-y: auto;
   padding: 16px;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   共通UI
+   =============================== */
+
+h1, h2, h3 {
+  margin: 0 0 8px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(244,238,230,.75);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* ===============================
+   カード
+   =============================== */
+
+.card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(244,238,230,.10);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+/* ===============================
+   入力系
+   =============================== */
+
+input, textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(244,238,230,.18);
+  border-radius: 12px;
+
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #f4eee6;
+
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(244,238,230,.4);
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgba(244,238,230,.45);
+}
+
+/* ===============================
+   ボタン
+   =============================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: .04em;
+
+  background: rgba(244,238,230,.12);
+  color: #f4eee6;
+}
+
+.btn.primary {
+  background: #6b4e3d;
+}
+
+.btn.primary:hover {
+  background: #7a5a47;
+}
+
+/* ===============================
+   カレンダー用（例）
+   =============================== */
+
+.calendarCell {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(244,238,230,.7);
+}
+
+.calendarCell .date {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f4eee6;
+}
+
+.calendarCell .sub {
+  font-size: 10px;
+  opacity: .8;
+}
+
+/* ===============================
+   スクロールバー（控えめ）
+   =============================== */
+
+.page::-webkit-scrollbar {
+  width: 6px;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background: rgba(244,238,230,.25);
+  border-radius: 999px;
 }
