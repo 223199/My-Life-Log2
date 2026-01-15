@@ -60,3 +60,48 @@ body {
   border-bottom: 1px solid rgba(244,238,230,.10);
 }
 
+/* PC画面全体 */
+body, html, #root {
+  margin: 0;
+  height: 100%;
+}
+
+/* スマホ枠の外側 */
+.phoneFrame {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* ← これが超重要 */
+  background: #f5f1ea; /* ほんのり背景（好みでOK） */
+}
+
+/* スマホ本体 */
+.phoneScreen {
+  width: 390px;           /* iPhoneっぽい幅 */
+  height: 844px;          /* iPhoneっぽい高さ */
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 擬似ステータスバー */
+.statusBar {
+  height: 48px;
+  background: #f9f7f3;
+  border-bottom: 1px solid #ddd;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+/* ページ本体 */
+.page {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
