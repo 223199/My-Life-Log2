@@ -25,10 +25,15 @@ export default function App() {
 
         {/* ここに今の page（あなたの既存UI）を入れる */}
         <div className="page">
-          {/* ...既存の中身... */}
+          <Routes>
+      <Route path="/" element={<CalendarPage />} />
+      <Route path="/day/:dateKey" element={<DayMenuPage />} />
+      <Route path="/day/:dateKey/:section" element={<SectionPage />} />
+    </Routes>
         </div>
       </div>
     </div>
   );
 }
+
 
