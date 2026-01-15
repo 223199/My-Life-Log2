@@ -23,7 +23,7 @@ export default function App() {
           <span>{new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
         </div>
 
-        {/* ここに今の page（あなたの既存UI）を入れる */}
+       
         <div className="page">
           <Routes>
       <Route path="/" element={<CalendarPage />} />
